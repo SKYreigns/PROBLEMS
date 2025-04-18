@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vowel counter</title>
+</head>
+<body>
+    <label for="string">Put The String of from where you want to count The Vowel
+        <input type="text" id="text-field" placeholder = "write the text" style="height: 100px; width: 400px;">
+    </label>
+    <button id="vow_counter" onclick="countVowel()">Count Vowel</button>
+    <div id="vowel_count"></div>
+
+
+    <script>
+
+        function countVowel(){
+            let texts = document.getElementById('text-field').value;
+            let lowercaseTexts = texts.toLowerCase();
+            let counterBtn = document.getElementById('vow_counter');
+            let vowelCounts = document.getElementById('vowel_count');
+            
+            let vowels = 'aeiou';
+
+            let counts = 0;
+
+            for (let char of lowercaseTexts) {
+                if (vowels.includes(char)) {
+                    counts++
+                }
+            }
+            vowelCounts.textContent = `Numbers of Vowels in the given Text is = ${counts}`;
+
+
+        }
+
+
+    </script>
+</body>
+</html>

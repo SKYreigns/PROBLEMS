@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>even or odd </title>
+</head>
+<style>
+  body {
+      background: #121212;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    .even, .odd {
+      display: none;
+      font-size: 24px;
+      font-weight: bold;
+    }
+</style>
+<body>
+    <p class="even">Even :- True</p>
+    <p class="odd">Odd :- False</p>
+
+    <script>
+        let num = +prompt('enter the number');
+        let evenNum = document.getElementsByClassName('even')[0];
+        let oddNum = document.getElementsByClassName('odd')[0];
+        function checkEven() {
+            if ((num % 2) === 0) {
+                evenNum.style.display = 'block';
+            }else{
+                oddNum.style.display = 'block';
+            }
+        }
+
+        checkEven();
+
+    </script>
+</body>
+</html>

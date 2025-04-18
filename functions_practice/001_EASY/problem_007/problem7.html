@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEMPERATURE CONVERTER</title>
+</head>
+<body>
+  <div>
+    <select name="operation" id="operations">
+      <option value="none">Select Operation</option>
+      <option value="add"> '+' :- ADDITION</option>
+      <option value="subtract">'-' :- SUBTRACTION</option>
+      <option value="multiply">'*' :- MULTIPLICATION</option>
+      <option value="divide">'/' :- DIVISION</option>
+    </select>
+    <br>
+    <label for="sum1">First number:-
+      <input type="number" id="sum1">
+    </label>
+    <br>
+    <label for="sum2">Second number :-
+      <input type="number" id="sum2">
+    </label>
+    <br>
+    <button id="btn" onclick="calculator()">CALCULATE</button>
+    <div id="result">RESULT = </div>
+  </div>
+
+  <script>
+    function calculator() {
+      // Get the selected operation and convert numbers from inputs
+      const action = document.getElementById('operations').value;
+      const num1 = parseFloat(document.getElementById('sum1').value);
+      const num2 = parseFloat(document.getElementById('sum2').value);
+      const resultDiv = document.getElementById('result');
+
+      // Validate input
+      if (action === "none" || isNaN(num1) || isNaN(num2)) {
+        resultDiv.textContent = "Please select a valid operation and enter valid numbers.";
+        return;
+      }
+
+      let answer = 0;
+      switch (action) {
+        case "add":
+          answer = num1 + num2;
+          resultDiv.textContent = `The addition of ${num1} and ${num2} is ${answer}.`;
+          break;
+        case "subtract":
+          answer = num1 - num2;
+          resultDiv.textContent = `The subtraction of ${num2} from ${num1} is ${answer}.`;
+          break;
+        case "multiply":
+          answer = num1 * num2;
+          resultDiv.textContent = `The multiplication of ${num1} and ${num2} is ${answer}.`;
+          break;
+        case "divide":
+          if (num2 === 0) {
+            resultDiv.textContent = "Division by zero is not allowed.";
+          } else {
+            answer = num1 / num2;
+            resultDiv.textContent = `The division of ${num1} by ${num2} is ${answer}.`;
+          }
+          break;
+        default:
+          resultDiv.textContent = "Invalid operation selected.";
+      }
+    }
+  </script>
+</body>
+</html>
