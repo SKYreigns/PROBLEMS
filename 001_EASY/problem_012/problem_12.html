@@ -1,0 +1,316 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area of a rectangle</title>
+</head>
+<style>
+    .polygon {
+      width: 400px;
+      height: 200px;
+      background-color: pink;
+      border: 1px solid crimson;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .input-group {
+      display: none;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <select name="polygons" id="polygons" onchange="showInputs()">
+    <option value="none">please select the polygon</option>
+    <option value="triangle">triangle</option>
+    <option value="rectangle">rectangle</option>
+    <option value="square">square</option>
+    <option value="parallelogram">parallelogram</option>
+    <option value="rhombus">rhombus</option>
+    <option value="kite">kite</option>
+    <option value="trapezium">trapezium</option>
+    <option value="circle">circle</option>
+  </select>
+
+  <div id="input-container">
+    <div class="input-group" id="input-width">
+      <input type="number" placeholder="Width or Base" id="width">
+    </div>
+    <div class="input-group" id="input-height">
+      <input type="number" placeholder="Height or Side 2" id="height">
+    </div>
+    <div class="input-group" id="input-altitude">
+      <input type="number" placeholder="Altitude" id="altitude">
+    </div>
+  </div>
+
+  <button onclick="calculateArea()">Calculate Area</button>
+  <div class="polygon" id="output">area unit sq</div>
+
+
+<script>
+
+    function showInputs() {
+      const polygon = document.getElementById('polygons').value;
+      document.querySelectorAll('.input-group').forEach(group => group.style.display = 'none');
+
+      switch (polygon) {
+        case 'triangle':
+          document.getElementById('input-width').style.display = 'block';
+          document.getElementById('input-altitude').style.display = 'block';
+          break;
+        case 'rectangle':
+          document.getElementById('input-width').style.display = 'block';
+          document.getElementById('input-height').style.display = 'block';
+          break;
+        case 'square':
+          document.getElementById('input-width').style.display = 'block';
+          break;
+        case 'parallelogram':
+          document.getElementById('input-width').style.display = 'block';
+          document.getElementById('input-altitude').style.display = 'block';
+          break;
+        case 'rhombus':
+        case 'kite':
+          document.getElementById('input-width').style.display = 'block';
+          document.getElementById('input-height').style.display = 'block';
+          break;
+        case 'trapezium':
+          document.getElementById('input-width').style.display = 'block';
+          document.getElementById('input-height').style.display = 'block';
+          document.getElementById('input-altitude').style.display = 'block';
+          break;
+        case 'circle':
+          document.getElementById('input-width').style.display = 'block';
+          break;
+      }
+    }
+
+    function calculateArea() {
+      const polygon = document.getElementById('polygons').value;
+      const width = +document.getElementById('width').value;
+      const height = +document.getElementById('height').value;
+      const altitude = +document.getElementById('altitude').value;
+      const output = document.getElementById('output');
+      let area = 0;
+
+      switch (polygon) {
+        case 'triangle':
+          area = 0.5 * width * altitude;
+          break;
+        case 'rectangle':
+          area = width * height;
+          break;
+        case 'square':
+          area = width * width;
+          break;
+        case 'parallelogram':
+          area = width * altitude;
+          break;
+        case 'rhombus':
+        case 'kite':
+          area = 0.5 * width * height;
+          break;
+        case 'trapezium':
+          area = 0.5 * (width + height) * altitude;
+          break;
+        case 'circle':
+          area = Math.PI * width * width;
+          break;
+        default:
+          output.textContent = "Please select a valid polygon.";
+          return;
+      }
+
+      output.textContent = `${area.toFixed(2)} unit sq`;
+    }
+
+
+</script>
+
+
+</body>
+
+
+
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Polygon Area Calculator</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    select, input, button {
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      background: #1f1f1f;
+      color: white;
+    }
+
+    button {
+      cursor: pointer;
+      background: #3a3aff;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #3a3aff;
+    }
+
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .svg-container {
+      margin-top: 2rem;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .shape {
+      transition: transform 0.3s ease, filter 0.3s ease;
+      fill: #4caf50;
+      stroke: #fff;
+      stroke-width: 2;
+    }
+
+    .shape:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px #4caf50);
+    }
+
+    .result {
+      margin-top: 1.5rem;
+      font-size: 1.3rem;
+      color: #00ffae;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Polygon Area Calculator</h1>
+  
+  <select id="polygonSelect">
+    <option value="">-- Select Polygon --</option>
+    <option value="triangle">Triangle</option>
+    <option value="rectangle">Rectangle</option>
+    <option value="square">Square</option>
+    <option value="circle">Circle</option>
+  </select>
+
+  <div class="inputs" id="inputs"></div>
+  <button onclick="calculateArea()">Calculate Area</button>
+
+  <div class="result" id="resultText">Area: --</div>
+
+  <div class="svg-container" id="shapeContainer"></div>
+
+  <script>
+    const inputsDiv = document.getElementById("inputs");
+    const shapeContainer = document.getElementById("shapeContainer");
+    const resultText = document.getElementById("resultText");
+
+    const shapeSVGs = {
+      triangle: `<svg viewBox="0 0 100 100"><polygon class="shape" points="50,10 90,90 10,90" /></svg>`,
+      rectangle: `<svg viewBox="0 0 100 60"><rect class="shape" x="10" y="10" width="80" height="40" /></svg>`,
+      square: `<svg viewBox="0 0 100 100"><rect class="shape" x="20" y="20" width="60" height="60" /></svg>`,
+      circle: `<svg viewBox="0 0 100 100"><circle class="shape" cx="50" cy="50" r="35" /></svg>`,
+    };
+
+    document.getElementById("polygonSelect").addEventListener("change", function () {
+      const shape = this.value;
+      inputsDiv.innerHTML = "";
+      shapeContainer.innerHTML = shapeSVGs[shape] || "";
+
+      switch (shape) {
+        case "triangle":
+          inputsDiv.innerHTML = `
+            <input type="number" id="base" placeholder="Base">
+            <input type="number" id="height" placeholder="Height">
+          `;
+          break;
+        case "rectangle":
+          inputsDiv.innerHTML = `
+            <input type="number" id="length" placeholder="Length">
+            <input type="number" id="width" placeholder="Width">
+          `;
+          break;
+        case "square":
+          inputsDiv.innerHTML = `
+            <input type="number" id="side" placeholder="Side">
+          `;
+          break;
+        case "circle":
+          inputsDiv.innerHTML = `
+            <input type="number" id="radius" placeholder="Radius">
+          `;
+          break;
+      }
+
+      resultText.textContent = "Area: --";
+    });
+
+    function calculateArea() {
+      const shape = document.getElementById("polygonSelect").value;
+      let area = 0;
+
+      switch (shape) {
+        case "triangle":
+          const base = +document.getElementById("base").value;
+          const height = +document.getElementById("height").value;
+          area = 0.5 * base * height;
+          break;
+        case "rectangle":
+          const length = +document.getElementById("length").value;
+          const width = +document.getElementById("width").value;
+          area = length * width;
+          break;
+        case "square":
+          const side = +document.getElementById("side").value;
+          area = side * side;
+          break;
+        case "circle":
+          const radius = +document.getElementById("radius").value;
+          area = Math.PI * radius * radius;
+          break;
+        default:
+          area = 0;
+      }
+
+      if (isNaN(area) || area <= 0) {
+        resultText.textContent = "Please enter valid dimensions!";
+      } else {
+        resultText.textContent = `Area: ${area.toFixed(2)} unit²`;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMPERATURE CONVERTOR</title>
+</head>
+<body>
+    <div>
+        <label for="in_celcius">In Celsius:</label><br>
+    <input type="number" id="in_celcius" placeholder="Temperature in °C">
+    <button onclick="cel_Convertor()">Convert</button><br><br>
+    <div id="cel_result">Result will appear here...</div><br><br>
+
+    <label for="in_farenhite">In Fahrenheit:</label><br>
+    <input type="number" id="in_farenhite" placeholder="Temperature in °F">
+    <button onclick="fer_Convertor()">Convert</button><br><br>
+    <div id="fer_result">Result will appear here...</div>
+
+    </div>
+
+
+    <script>
+        function cel_Convertor() {
+          const deg_cel = parseFloat(document.getElementById('in_celcius').value);
+          const result = document.getElementById('cel_result');
+    
+          if (!isNaN(deg_cel)) {
+            const cToF = (deg_cel * 9 / 5) + 32;
+            result.textContent = `${deg_cel}°C is ${cToF.toFixed(2)}°F`;
+          } else {
+            result.textContent = "Please enter a valid Celsius value.";
+          }
+        }
+    
+        function fer_Convertor() {
+          const deg_fer = parseFloat(document.getElementById('in_farenhite').value);
+          const result = document.getElementById('fer_result');
+    
+          if (!isNaN(deg_fer)) {
+            const fToC = (deg_fer - 32) * 5 / 9;
+            result.textContent = `${deg_fer}°F is ${fToC.toFixed(2)}°C`;
+          } else {
+            result.textContent = "Please enter a valid Fahrenheit value.";
+          }
+        }
+      </script>
+</body>
+</html>
